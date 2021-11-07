@@ -1,0 +1,5 @@
+---
+- name: restart elasticsearch container
+  docker_container:
+    name: "{{ elasticsearch_container_name }}"
+    restart: true

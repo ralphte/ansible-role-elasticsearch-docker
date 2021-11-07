@@ -1,0 +1,25 @@
+---
+- name: 'setup : create elasticsearch configuration'
+  template:
+    src: "elasticsearch.yml.j2"
+    dest: "{{ elasticsearch_config }}/elasticsearch.yml"
+    owner: "{{ elasticsearch_user }}"
+    group: "{{ elasticsearch_group }}"
+    mode: 770
+  notify:
+    - restart elasticsearch container
+
+- name: 'setup : start elasticsearch container'
+  become: true
+  docker_container:
+    name: '{{ elasticsearch_container_name }}'
+    image: '{{ elasticsearch_image }}'
+    restart_policy: unless-stopped
+    ulimits: "memlock:-1:-1"
+    published_ports: '{{ elasticsearch_ports }}'
+    volumes: '{{ elasticsearch_volumes + elasticsearch_add_volumes }}'
+    labels: '{{ elasticsearch_labels }}'
+    env: '{{ elasticsearch_env }}'
+    log_options: '{{ elasticsearch_log_options }}'
+    networks:
+      - name: '{{ elasticsearch_network_name }}'

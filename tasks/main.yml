@@ -1,0 +1,13 @@
+---
+- name: setup system
+  include_tasks: 0_system.yml
+
+- name: setup keystore
+  include_tasks: 1_keystore.yml
+
+- name: setup ssl
+  include_tasks: 2_ssl.yml
+
+- name: setup container
+  include_tasks: 3_container.yml
+

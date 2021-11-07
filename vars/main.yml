@@ -1,0 +1,8 @@
+---
+elasticsearch_volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - "{{ elasticsearch_data }}:/usr/share/elasticsearch/data"
+    - "{{ elasticsearch_plugins }}:/usr/share/elasticsearch/plugins"
+    - "{{ elasticsearch_config }}/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+    - "{{ elasticsearch_config }}/ssl/elastic-certificates.p12:/usr/share/elasticsearch/config/elastic-certificates.p12"
+    - "{{ elasticsearch_config }}/keystore/elasticsearch.keystore:/usr/share/elasticsearch/config/elasticsearch.keystore"

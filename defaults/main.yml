@@ -1,0 +1,44 @@
+---
+# defaults file
+# Setup vars
+elasticsearch_config: /etc/elasticsearch
+elasticsearch_data: /etc/elasticsearch_data
+elasticsearch_plugins: /etc/elasticsearch_plugins
+elasticsearch_hostname: 'elasticsearch'
+elasticsearch_network: 'elasticsearch'
+elasticsearch_version: '7.12.0'
+elasticsearch_java_options: '-Xms1g -Xmx1g'
+elasticsearch_domain_name: 'domain.com'
+elasticsearch_cluster_name: 'cluster'
+
+node_name: 'elasticsearch'
+node_master: "true"
+node_data: "true"
+node_ingest: "true"
+node_ml: "false"
+master: "true"
+
+# service vars
+elasticsearch_container_name: 'elasticsearch'
+elasticsearch_network_name: "{{ elasticsearch_network }}"
+elasticsearch_image: 'docker.elastic.co/elasticsearch/elasticsearch:{{ elasticsearch_version }}'
+elasticsearch_add_volumes: []
+elasticsearch_ports: []
+elasticsearch_labels: {}
+elasticsearch_env:
+  ES_JAVA_OPTS: "{{ elasticsearch_java_options }}"
+  ES_TMPDIR: "/tmp"
+
+elasticsearch_log_options: 
+  max-size: "100m"
+  max-file: "3"
+
+elasticsearch_server_name: 'elasticsearch'
+elasticsearch_server_host: '0.0.0.0'
+elasticsearch_server_port: 9200
+
+elasticsearch_username: elastic
+elasticsearch_password: elastic
+
+elasticsearch_user: '1000'
+elasticsearch_group: '0'
