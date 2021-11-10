@@ -24,6 +24,7 @@ node.name: {{ node_name }}
 node.master: {{ node_master }}
 node.data: {{ node_data }}
 node.ingest: {{ node_ingest }}
+node.ml: {{ node_ml }}
 cluster.remote.connect: false
 #
 # ------------------------------------ Security ------------------------------------
@@ -104,10 +105,13 @@ cluster.initial_master_nodes:
 #
 #action.destructive_requires_name: true
 # ---------------------------------- S3 Snapshot -----------------------------------
-# s3.client.default.endpoint: "{{ s3_snapshot_url }}"
-# s3.client.default.protocol: {{ s3_snapshot_protocol }}
-# s3.client.default.path_style_access: true
-
+{% for bucket in elastic_s3 %}
+{% if bucket.name is defined %}
+s3.client.{{ bucket.name }}.endpoint: "{{ bucket.url }}"
+s3.client.{{ bucket.name }}.protocol: "{{ bucket.protocol }}"
+s3.client.{{ bucket.name }}.path_style_access: "{{ bucket.path_style_access }}"
+{% endif %}
+{% endfor %}
 # cluster.routing.allocation.node_initial_primaries_recoveries: 50
 # cluster.routing.allocation.node_concurrent_recoveries: 40
 # indices.recovery.max_bytes_per_sec: 2gb

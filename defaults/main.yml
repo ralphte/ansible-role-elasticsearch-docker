@@ -3,7 +3,7 @@
 # Setup vars
 elasticsearch_config: /etc/elasticsearch
 elasticsearch_data: /etc/elasticsearch_data
-elasticsearch_plugins: /etc/elasticsearch_plugins
+elasticsearch_plugins_folder: /etc/elasticsearch_plugins
 elasticsearch_hostname: 'elasticsearch'
 elasticsearch_network: 'elasticsearch'
 elasticsearch_version: '7.12.0'
@@ -17,6 +17,11 @@ node_data: "true"
 node_ingest: "true"
 node_ml: "false"
 master: "true"
+
+elasticsearch_s3_snapshot_url:
+elasticsearch_s3_snapshot_protocol:
+elasticsearch_s3_path_style_access:
+
 
 # service vars
 elasticsearch_container_name: 'elasticsearch'

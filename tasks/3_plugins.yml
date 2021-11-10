@@ -1,0 +1,30 @@
+--- 
+- name: Elasticsearch Remove Plugins
+  docker_container:
+    name: "elasticsearch-plugins"
+    image: '{{ elasticsearch_image }}'
+    state: started
+    hostname: "elasticsearch-plugins"
+    pull: yes
+    restart_policy: no
+    command: 'bin/elasticsearch-plugin remove -b {{ elasticsearch_plugins }}'
+    volumes:
+      - "{{ elasticsearch_plugins_folder }}:/usr/share/elasticsearch/plugins"
+  notify:
+    - restart elasticsearch container
+  when: elasticsearch_plugins is defined
+
+- name: Elasticsearch Install Plugins
+  docker_container:
+    name: "elasticsearch-plugins"
+    image: '{{ elasticsearch_image }}'
+    state: started
+    hostname: "elasticsearch-plugins"
+    pull: yes
+    restart_policy: no
+    command: 'bin/elasticsearch-plugin install -b {{ elasticsearch_plugins }}'
+    volumes:
+      - "{{ elasticsearch_plugins_folder }}:/usr/share/elasticsearch/plugins"
+  notify:
+    - restart elasticsearch container
+  when: elasticsearch_plugins is defined

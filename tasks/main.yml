@@ -8,6 +8,9 @@
 - name: setup ssl
   include_tasks: 2_ssl.yml
 
+- name: setup plugis
+  include_tasks: 3_plugins.yml
+
 - name: setup container
-  include_tasks: 3_container.yml
+  include_tasks: 4_container.yml
 
